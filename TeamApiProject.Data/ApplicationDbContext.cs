@@ -9,6 +9,8 @@ namespace TeamApiProject.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) {}
+
+        public DbSet<PostsEntity> Posts {get; set;} = null!;
     
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

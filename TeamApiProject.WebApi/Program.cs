@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<IPostService, PostService>();
+
 // Add connection string
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 

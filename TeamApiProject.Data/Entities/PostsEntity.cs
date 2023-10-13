@@ -21,7 +21,6 @@ namespace TeamApiProject.Data.Entities
         [ForeignKey(nameof(AuthorId))]
         public int AuthorId { get; set; }
         public UserEntity Author { get; set; } = null!;
-        
-
+        public DateTime DateCreated { get; set; }
     }
 }

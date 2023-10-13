@@ -11,6 +11,7 @@ namespace TeamApiProject.WebApi.Controllers
       public PostController(IPostService postService)
       {
         _postService = postService;
+        
       }
     }
 }
