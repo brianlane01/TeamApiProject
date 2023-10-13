@@ -4,6 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using TeamApiProject.Models.User;
 using TeamApiProject.Services.User;
+using TeamApiProject.Models.Post;
+using TeamApiProject.Models.Comment;
+using TeamApiProject.Models.Responses;
+using TeamApiProject.Services.Post;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
@@ -40,6 +44,14 @@ public class UserController : ControllerBase
         }
 
         return BadRequest(new TextResponse("User could not be registered."));
+    }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<UserListItem>), 200)]
+    public  async Task<IActionResult> GetAllUsers()
+    {
+        var users = await _userService.GetAllUsersAsync();
+        return Ok(users);
     }
 
     [HttpGet("{userId:int}")]

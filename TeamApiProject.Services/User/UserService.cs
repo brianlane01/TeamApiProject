@@ -33,6 +33,8 @@ namespace TeamApiProject.Services.User
                 UserName = entity.UserName!,
                 FirstName = entity.FirstName,
                 LastName = entity.LastName,
+                Posts = entity.Posts
+                Likes = entity.Likes
                 DateCreated = entity.DateCreated
             };
 
@@ -68,6 +70,21 @@ namespace TeamApiProject.Services.User
             return registerResult.Succeeded;
         }
 
+        public async Task<IEnumerable<UserListItem>> GetAllUsersAsync()
+        {
+            List<UserListItem> users = await _dbContext.Users
+            .Select(entity => new UserListItem
+            {
+                Id = entity.Id,
+                FirstName = entity.FirstName,
+                LastName = entity.LastName,
+                DateCreated = entity.DateCreated
+            })
+            .ToListAsync();
+
+            return users;
+        }
+
         private async Task<bool> CheckUserNameAvailability(string userName)
         {
             UserEntity? existingUser = await _userManager.FindByNameAsync(userName);
@@ -79,19 +96,5 @@ namespace TeamApiProject.Services.User
             UserEntity? existingUser = await _userManager.FindByEmailAsync(email);
             return existingUser is null; 
         }
-
-        // private async Task<bool> IsEmailUniqueAsync(string email)
-        // {
-        //     // Check if the provided email is unique in the database.
-        //     var existingUser = await _userManager.FindByEmailAsync(email);
-        //     return existingUser == null;
-        // }
-
-        // private async Task<bool> IsUsernameUniqueAsync(string username)
-        // {
-        //     // Check if the provided username is unique in the database.
-        //     var existingUser = await _userManager.FindByNameAsync(username);
-        //     return existingUser == null;
-        // }
     }
 }
