@@ -8,9 +8,11 @@ namespace TeamApiProject.Models.Posts
 {
     public class PostRegister
     {
+        public int id {get;set;}
         [Required, MinLength(1), MaxLength(100)]
         public string Title { get; set; }
         [Required, MinLength(1), MaxLength(500)]
         public string Text { get; set; }
+        public DateTime DateCreated {get; set;}
     }
 }

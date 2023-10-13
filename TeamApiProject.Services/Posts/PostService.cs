@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Azure;
 using Microsoft.AspNetCore.Identity;
 using TeamApiProject.Data;
 using TeamApiProject.Data.Entities;
@@ -27,5 +28,15 @@ namespace TeamApiProject.Services.Posts
 
             _dbContext = dbContext;
         }                    
+    }
+    public async Task<PostListItem?> CreatePostAsync(PostCreate request)
+    {
+        PostsEntity entity = new()
+        {
+            Title = entity.Title,
+                    Text = entity.Text,
+                    DateCreated = entity.DateCreated
+        };
+        return response;
     }
 }
