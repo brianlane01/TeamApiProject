@@ -6,5 +6,6 @@ namespace TeamApiProject.Services.User
     {
         Task<bool> RegisterUserAsync(UserRegister model);
         Task<UserDetail?> GetUserByIdAsync(int userId);
+        Task<IEnumerable<UserListItem>> GetAllUsersAsync();
     }
 }
