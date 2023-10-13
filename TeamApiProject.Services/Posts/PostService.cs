@@ -18,17 +18,8 @@ namespace TeamApiProject.Services.Posts
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly int _userId;
-        public PostService(UserManager<UserEntity> userManager,
-                            SignInManager<UserEntity> signInManager,
-                            ApplicationDbContext dbContext)
+        public PostService(ApplicationDbContext dbContext)
         {
-            var currentUser = signInManager.Context.User;
-            var userIdClaim = userManager.GetUserId(currentUser);
-            var hasValidId = int.TryParse(userIdClaim, out _userId);
-
-            if (hasValidId == false)
-                throw new Exception("Attempted to build without ID claim.");
-
             _dbContext = dbContext;
         }
 
@@ -61,7 +52,7 @@ namespace TeamApiProject.Services.Posts
         public async Task<IEnumerable<PostRegister>> GetAllPostsAsync()
         {
             List<PostRegister> posts = await _dbContext.Posts
-                .Where(entity => entity.AuthorId == _userId)
+                // .Where(entity => entity.AuthorId == _userId)
                 .Select(entity => new PostRegister
                 {
                     Id = entity.Id,

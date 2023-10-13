@@ -48,6 +48,7 @@ public async Task<RepliesDetail?> GetUserbyIdAsync(int repliesId)
             
             RepliesListItem response = new()
             {
+                Id = entity.Id,
                 Text = entity.Text,
                 AuthorId = entity.AuthorId,
                 ParentId = entity.ParentId

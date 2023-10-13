@@ -5,7 +5,7 @@ using TeamApiProject.Models.Responses;
 
 namespace TeamApiProject.WebApi.Controllers
 {
-    [Route("api[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class PostController : Controller
     {
@@ -21,7 +21,7 @@ namespace TeamApiProject.WebApi.Controllers
             return Ok(posts);
         }
         // Post
-        [HttpPost]
+        [HttpPost("Register")]
         public async Task<IActionResult> CreatePost([FromBody] PostCreate request)
         {
             if(!ModelState.IsValid)
