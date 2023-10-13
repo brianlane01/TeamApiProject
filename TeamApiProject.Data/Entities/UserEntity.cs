@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+
 using Microsoft.AspNetCore.Identity;
+
 
 namespace TeamApiProject.Data.Entities;
 
@@ -22,4 +24,5 @@ public class UserEntity : IdentityUser<int>
     public virtual List<LikesEntity> Likes {get; set;} = new List<LikesEntity>();
 
 
+    public List<LikesEntity> Likes { get; set; } = new List<LikesEntity>();
 }
