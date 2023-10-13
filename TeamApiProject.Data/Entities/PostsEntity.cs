@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace TeamApiProject.Data.Entities
 {
@@ -20,7 +21,6 @@ namespace TeamApiProject.Data.Entities
         [ForeignKey(nameof(AuthorId))]
         public int AuthorId { get; set; }
         public UserEntity Author { get; set; } = null!;
-        
         
 
     }
