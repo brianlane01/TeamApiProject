@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-
 namespace TeamApiProject.Data.Entities;
 
 public class UserEntity : IdentityUser<int>
@@ -13,4 +12,5 @@ public class UserEntity : IdentityUser<int>
     public string? LastName { get; set; } = string.Empty;
 
 
+    public List<LikesEntity> Likes { get; set; } = new List<LikesEntity>();
 }
