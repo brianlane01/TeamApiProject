@@ -9,9 +9,12 @@ namespace TeamApiProject.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) {}
-
         public DbSet<RepliesEntity> Replies {get; set;} = null!;
-    
+        public DbSet<PostsEntity> Posts {get; set;} = null!;
+        public DbSet<UserEntity> Users { get; set; }
+        public DbSet<CommentEntity> Comments {get; set;}
+        public DbSet<LikeEntity> Likes { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
