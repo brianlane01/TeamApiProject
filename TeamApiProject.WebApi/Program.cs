@@ -1,9 +1,9 @@
+using TeamApiProject.Services.Reply;
 
 using System.Text;
 using TeamApiProject.Data;
 using TeamApiProject.Data.Entities;
 using TeamApiProject.Services.User;
-// using TeamApiProject.Models.Maps;
 using TeamApiProject.Services.Comment;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +14,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IRepliesService, RepliesService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDefaultIdentity<UserEntity>(options =>
