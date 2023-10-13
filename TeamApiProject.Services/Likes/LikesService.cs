@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TeamApiProject.Models.User;
 
 namespace TeamApiProject.Services.Likes
 {
@@ -21,6 +22,7 @@ namespace TeamApiProject.Services.Likes
             {
                 postLikes[postId].Add(userId);
             }
+        
         }
 
         public int GetLikesCount(int postId)

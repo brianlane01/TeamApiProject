@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TeamApiProject.Services.Posts;
+using TeamApiProject.Models.Posts;
+using TeamApiProject.Models.Responses;
 
 namespace TeamApiProject.WebApi.Controllers
 {

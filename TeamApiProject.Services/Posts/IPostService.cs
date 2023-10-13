@@ -11,19 +11,7 @@ namespace TeamApiProject.Services.Posts
     {
         Task<PostListItem?> CreatePostAsync(PostCreate request);
         
-        async Task<IEnumerable<PostRegister>> GetAllPostsAsync()
-        {
-            List<PostRegister> posts = await _dbContext.Posts
-                .Where(entity => entity.AuthourId == _userId)
-                .Select(EntityEntry => new PostRegister
-                {
-                    Id = entity.Id,
-                    Title = entity.Title,
-                    Text = entity.Text,
-                    DateCreated = entity.DateCreated
-                })
-                .ToListAsync();
-                return posts;
-        }
+        Task<IEnumerable<PostRegister>> GetAllPostsAsync();
+        
     }
 }

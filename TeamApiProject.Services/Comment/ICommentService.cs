@@ -1,4 +1,4 @@
-using TeamApiProject.Models.Comment
+using TeamApiProject.Models.Comment;
 
 namespace TeamApiProject.Services.Comment
 {
@@ -8,7 +8,7 @@ namespace TeamApiProject.Services.Comment
         Task<CommentListItem?> CreateCommentAsync(CommentCreate request);
         Task<CommentDetail?> GetCommentByPostIdAsync(int postId);
         Task<bool> UpdateCommentAsync(CommentUpdate request);
-        task<bool> DeleteCommentAsync(int commentId);
+        Task<bool> DeleteCommentAsync(int commentId);
 
     }
 }

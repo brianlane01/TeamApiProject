@@ -1,4 +1,4 @@
-using ElevenNote.Models.User;
+using TeamApiProject.Models.User;
 
 namespace TeamApiProject.Services.User
 {

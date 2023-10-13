@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TeamApiProject.Models.User;
-using TeamApiProject.Models.Post;
+using TeamApiProject.Models.Posts;
 using TeamApiProject.Models.Comment;
 using TeamApiProject.Models.Responses;
-using TeamApiProject.Services.Post;
+using TeamApiProject.Services.Posts;
 using TeamApiProject.Services.User;
+using TeamApiProject.Services.Comment;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,7 +28,7 @@ public class CommentController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateComment([FromBody] NoteCreate request)
+    public async Task<IActionResult> CreateComment([FromBody] CommentCreate request)
     {
         if(!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -70,7 +71,7 @@ public class CommentController : ControllerBase
 
         return await _commentService.UpdateCommentAsync(request)
             ? Ok("The Comment was updated successfully.")
-            : BadRequest("The Comment was not updated, please try again.")
+            : BadRequest("The Comment was not updated, please try again.");
     }
 
     [HttpDelete("{commentId:int}")]

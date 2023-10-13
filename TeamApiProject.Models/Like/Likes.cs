@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-namespace TeamApiProject.Models
+namespace TeamApiProject.Models.Like
 {
     public class Likes
     {

@@ -1,6 +1,10 @@
 using TeamApiProject.Data;
-using TeamApiProject.Entities;
+using TeamApiProject.Data.Entities;
+using TeamApiProject.Models.Comment;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace TeamApiProject.Services.Comment
 {
@@ -8,7 +12,7 @@ namespace TeamApiProject.Services.Comment
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly int _userId;
-        private readonly int _postId
+        private readonly int _postId;
 
         public CommentService(ApplicationDbContext dbContext)
         {
@@ -17,10 +21,10 @@ namespace TeamApiProject.Services.Comment
 
         public async Task<CommentListItem?> CreateCommentAsync(CommentCreate request)
         {
-            CommentEntity entity = new CommentEntity();
+            CommentEntity entity = new CommentEntity()
             {
                 Content = request.Content,
-                PostId = request.Post,
+                PostId = request.PostId,
                 AuthorId = request.AuthorId,
                 DateCreated = DateTimeOffset.Now
             };
@@ -35,7 +39,7 @@ namespace TeamApiProject.Services.Comment
             {
                 Id = entity.Id,
                 Content = entity.Content,
-                DateCreated = entity.DateCreated,
+                DateCreated = DateTime.Now,
                 PostId = entity.PostId,
                 AuthorId = entity.AuthorId
             };
@@ -58,7 +62,7 @@ namespace TeamApiProject.Services.Comment
             return comments;
         }
 
-        public async Task<CommentDetail?> GetCommentByPostId(int postId)
+        public async Task<CommentDetail?> GetCommentByPostIdAsync(int postId)
         {
             CommentEntity? entity = await _dbContext.Comments
                 .FirstOrDefaultAsync(e => e.Id == postId);
@@ -75,14 +79,14 @@ namespace TeamApiProject.Services.Comment
 
         public async Task<bool> UpdateCommentAsync(CommentUpdate request)
         {
-            CommentEntity? entity await _dbContext.Comments.FindAsync(request.Id);
+            CommentEntity? entity = await _dbContext.Comments.FindAsync(request.Id);
 
-            if(entity?)
+            if(entity == null)
                 return false;
 
             entity.Content = request.Content;
             entity.AuthorId = request.AuthorId;
-            entity.PostId = request.postId;
+            entity.PostId = request.PostId;
             entity.DateModified = DateTimeOffset.Now;
 
             int numberOfChanges = await _dbContext.SaveChangesAsync();
@@ -94,7 +98,7 @@ namespace TeamApiProject.Services.Comment
         {
             var commentEntity = await _dbContext.Comments.FindAsync(commentId);
 
-            if (commentEntity?)
+            if (commentEntity == null)
                 return false;
 
             _dbContext.Comments.Remove(commentEntity);

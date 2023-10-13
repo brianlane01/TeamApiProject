@@ -2,27 +2,30 @@ using TeamApiProject.Models.User;
 using TeamApiProject.Data.Entities;
 using TeamApiProject.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace TeamApiProject.Services.User
 {
     public class UserService : IUserService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _dbContext;
         private readonly UserManager<UserEntity> _userManager;
         private readonly SignInManager<UserEntity> _signInManager;
 
-        public UserService(ApplicationDbContext context,
+        public UserService(ApplicationDbContext dbContext,
                             UserManager<UserEntity> userManager,
                             SignInManager<UserEntity> signInManager)
         {
-            _context = context;
+            _dbContext = dbContext;
             _userManager = userManager;
             _signInManager = signInManager;
         }
 
         public async Task<UserDetail?> GetUserByIdAsync(int userId)
         {
-            UserEntity? entity = await _context.Users.FindAsync(userId);
+            UserEntity? entity = await _dbContext.Users.FindAsync(userId);
             if(entity is null)
                 return null;
             
@@ -33,8 +36,8 @@ namespace TeamApiProject.Services.User
                 UserName = entity.UserName!,
                 FirstName = entity.FirstName,
                 LastName = entity.LastName,
-                Posts = entity.Posts
-                Likes = entity.Likes
+                Posts = entity.Posts,
+                Likes = entity.Likes,
                 DateCreated = entity.DateCreated
             };
 
@@ -59,7 +62,6 @@ namespace TeamApiProject.Services.User
             {
                 Email = model.Email,
                 UserName = model.UserName,
-                Password = model.Password,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 DateCreated = DateTime.Now
