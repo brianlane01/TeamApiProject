@@ -58,6 +58,7 @@ namespace TeamApiProject.Services.Posts
                     Id = entity.Id,
                     Title = entity.Title,
                     Text = entity.Text,
+                    AuthorId = entity.AuthorId,
                     DateCreated = entity.DateCreated
                 })
                 .ToListAsync();
