@@ -24,7 +24,7 @@ namespace TeamApiProject.Data.Entities
         [Required]
         [ForeignKey(nameof(Post))]
         public int PostId { get; set; }
-        public PostEntity Post { get; set; }
+        public PostsEntity Post { get; set; }
 
         public virtual List<RepliesEntity> Replies {get; set;}
 

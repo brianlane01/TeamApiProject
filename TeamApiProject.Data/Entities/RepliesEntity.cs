@@ -15,7 +15,6 @@ namespace TeamApiProject.Data.Entities
 
         [Required]
         [ForeignKey(nameof(Comment))]
-      
         public int ParentId {get; set;}
         public CommentEntity Comment {get; set;} = null;
         

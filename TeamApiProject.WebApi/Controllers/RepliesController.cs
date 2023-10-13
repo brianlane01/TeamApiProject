@@ -3,7 +3,7 @@ using TeamApiProject.Models.Reply;
 using TeamApiProject.Models.Responses;
 using TeamApiProject.Services.Reply;
 
-namespace TeamApiProject.Services.Controllers
+namespace TeamApiProject.WebApi.Controllers
 {
     [Microsoft.AspNetCore.Mvc.Route("Api/[controller]")]
     [ApiController]
