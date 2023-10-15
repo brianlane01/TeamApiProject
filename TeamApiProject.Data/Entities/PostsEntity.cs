@@ -22,5 +22,7 @@ namespace TeamApiProject.Data.Entities
         public int AuthorId { get; set; }
         public UserEntity Author { get; set; } = null!;
         public DateTime DateCreated { get; set; }
+
+        public virtual List<LikesEntity> Likes {get; set;} = new List<LikesEntity>();
     }
 }

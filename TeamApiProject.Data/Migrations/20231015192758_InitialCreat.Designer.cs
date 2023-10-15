@@ -12,8 +12,8 @@ using TeamApiProject.Data;
 namespace TeamApiProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231013180045_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20231015192758_InitialCreat")]
+    partial class InitialCreat
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -204,6 +204,13 @@ namespace TeamApiProject.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Action")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LikeSelection")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
@@ -211,6 +218,8 @@ namespace TeamApiProject.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PostId");
 
                     b.HasIndex("UserId");
 
@@ -397,7 +406,7 @@ namespace TeamApiProject.Data.Migrations
                     b.HasOne("TeamApiProject.Data.Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -406,7 +415,7 @@ namespace TeamApiProject.Data.Migrations
                     b.HasOne("TeamApiProject.Data.Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -431,11 +440,19 @@ namespace TeamApiProject.Data.Migrations
 
             modelBuilder.Entity("TeamApiProject.Data.Entities.LikesEntity", b =>
                 {
+                    b.HasOne("TeamApiProject.Data.Entities.PostsEntity", "Post")
+                        .WithMany("Likes")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("TeamApiProject.Data.Entities.UserEntity", "User")
                         .WithMany("Likes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Post");
 
                     b.Navigation("User");
                 });
@@ -473,6 +490,11 @@ namespace TeamApiProject.Data.Migrations
             modelBuilder.Entity("TeamApiProject.Data.Entities.CommentEntity", b =>
                 {
                     b.Navigation("Replies");
+                });
+
+            modelBuilder.Entity("TeamApiProject.Data.Entities.PostsEntity", b =>
+                {
+                    b.Navigation("Likes");
                 });
 
             modelBuilder.Entity("TeamApiProject.Data.Entities.UserEntity", b =>
